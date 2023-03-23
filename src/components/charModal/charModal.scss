@@ -1,0 +1,28 @@
+@import '../../style/variables.scss';
+
+.char {
+    &__modal.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__modal {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 999;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        &_content {
+            display: flex;
+            gap: 1em;
+            padding: 0;
+            background-color: $second-color;
+            border-radius: 16px;
+            width: 600px;
+            height: 300px; 
+        }
+    }
+}
