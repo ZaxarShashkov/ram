@@ -8,13 +8,37 @@
     &__grid {
         list-style: circle;
         display: grid;
-        grid-template-columns: repeat(3, 300px);
-        column-gap: 6em;
-        row-gap: 2em;
+        grid-template-columns: repeat(4, 230px);
+        // column-gap: 3.6em;
+        justify-content: space-between;
+        row-gap: 3em;
         list-style: none;
     }
     &__item {
-        width: 300px;
-        height: 300px;
+        position: relative;
+        width: 230px;
+        height: 250px;
+        background-color: #317ac7;
+        border-radius: 1em;
+    }
+    &__block {
+        position: relative;
+    }
+    &__img {
+        position: absolute;
+        object-fit: contain;
+        width: 190px;
+        height: 190px;
+        border-radius: 1em;
+        left: 1.3em;
+        top: -1.5em;
+        filter: drop-shadow(0 0 1em $second-color);
+    }
+    &__name {
+        position: relative;
+        font-size: 1.3em;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 9em;
     }
 }

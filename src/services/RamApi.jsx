@@ -12,7 +12,7 @@ class RamApi {
   };
 
   getAllCharacters = async () => {
-    const res = await this.getResource(`${this._apiBase}?page=1`);
+    const res = await this.getResource(`${this._apiBase}?page=3`);
     return res.results.map(this._tansformCharacter);
   };
 
