@@ -6,6 +6,7 @@ class RandomChar extends Component {
     constructor(props) {
         super(props);
         this.updateChar();
+        this.allChar();
     }
 
     state = {
@@ -21,20 +22,18 @@ class RandomChar extends Component {
     ramApi = new RamApi();
 
     updateChar = () => {
-        const id = 5;
+        const id = 4;
         this.ramApi
           .getCharacter(id)
           .then(res => {
-            this.setState({
-              name: res.name ,
-              status: res.status,
-              image: res.image,
-              species: res.species,
-              gender: res.gender,
-              location: res.location.name,
-              origin: res.origin.name
-            })
+            this.setState(res)
         })
+    }
+
+    allChar = () => {
+      this.ramApi
+        .getAllCharacters()
+        .then(res => console.log(res))
     }
 
   render() {
