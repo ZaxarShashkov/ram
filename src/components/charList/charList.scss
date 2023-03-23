@@ -1,0 +1,20 @@
+@import '../../style/variables.scss';
+
+.char {
+    &__list {
+        color: $main-color;
+        margin-top: 3em;
+    }
+    &__grid {
+        list-style: circle;
+        display: grid;
+        grid-template-columns: repeat(3, 300px);
+        column-gap: 6em;
+        row-gap: 2em;
+        list-style: none;
+    }
+    &__item {
+        width: 300px;
+        height: 300px;
+    }
+}

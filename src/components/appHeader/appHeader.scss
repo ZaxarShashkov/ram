@@ -1,0 +1,22 @@
+@import '../../style/variables.scss';
+
+.app {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__logo {
+        width: 120px;
+        height: 120px;
+        background: url(../../resources/image/ramlogo.jpg) center/cover;
+    }
+    &__title {
+        font-size: 3em;
+        text-align: right;
+        color: $second-color;
+        span {
+            color: $main-color;
+        }
+    }
+}

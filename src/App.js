@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import AppHeader from './components/appHeader/AppHeader';
+import CharList from './components/charList/CharList';
+import RandomChar from './components/randomChar/RandomChar'
 
-function App() {
+import RamApi from './services/RamApi';
+import './style/style.scss';
+
+const ramApi = new RamApi;
+
+// ramApi.getAllCharacters().then(res => res.results.forEach(item => console.log(item.image)))
+
+// // ramApi.getCharacter(2).then(res => console.log(res.location.name))
+
+
+function App() {  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppHeader/>
+      <RandomChar/>
+      <main className="main">
+        <CharList/>
+      </main>
     </div>
   );
 }
