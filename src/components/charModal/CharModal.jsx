@@ -7,15 +7,10 @@ import RamApi from "../../services/RamApi";
 import './charModal.scss'
 
 class CharModal extends Component {
-  constructor(props) {
-    super(props);
-    
-  }
-  
 
   render() {
 
-    const {setModal , visible} = this.props;
+    const {visible} = this.props;
 
     let classNames = 'char__modal';
     if(visible) {
@@ -25,7 +20,6 @@ class CharModal extends Component {
     const removeClasses = () => {
       const modal = document.querySelector('.char__modal');
       modal.classList.remove('active')
-      console.log(modal)
     }
     
 

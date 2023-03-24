@@ -48,7 +48,6 @@ class CharList extends Component {
           >
           <div className="char__block"
           onClick={() => this.props.setModal(this.props.visible)}
-          setModal={this.props.setModal}
           visible={this.props.visible}>
             <img src={item.image} alt="char" className="char__img" />
           </div>

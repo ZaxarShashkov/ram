@@ -8,10 +8,13 @@
     }
     &__modal {
         position: fixed;
-        top: 0;
+        width: 600px;
+        height: 300px;
+        border-radius: 16px;
+        top: 20%;
         bottom: 0;
         right: 0;
-        left: 0;
+        left: 34.5%;
         z-index: 999;
         background: rgba(0, 0, 0, 0.5);
         display: none;
@@ -19,7 +22,7 @@
             display: flex;
             gap: 1em;
             padding: 0;
-            background-color: $second-color;
+            background-color: rgba(65, 239, 252, 0.8);
             border-radius: 16px;
             width: 600px;
             height: 300px; 
