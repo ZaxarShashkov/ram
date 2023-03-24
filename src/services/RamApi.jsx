@@ -23,6 +23,7 @@ class RamApi {
 
   _tansformCharacter = (res) => {
     return {
+      id: res.id,
       name: res.name,
       status: res.status,
       image: res.image,
