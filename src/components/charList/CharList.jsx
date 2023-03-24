@@ -45,7 +45,7 @@ class CharList extends Component {
           className="char__item"
           key={item.id}
           onClick={() => this.props.onCharSelected(item.id)}
-        >
+          >
           <div className="char__block"
           onClick={() => this.props.setModal(this.props.visible)}
           setModal={this.props.setModal}

@@ -18,9 +18,9 @@ class App extends Component {
     })
   }
 
-  setModal = (prev) => {
+  setModal = (modal) => {
     this.setState({
-      modal: !prev
+      modal: !modal,
     })
   }
 

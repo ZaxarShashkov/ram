@@ -7,15 +7,33 @@ import RamApi from "../../services/RamApi";
 import './charModal.scss'
 
 class CharModal extends Component {
+  constructor(props) {
+    super(props);
+    
+  }
+  
 
   render() {
 
-    const visibility = this.props.visible ? true : null;
+    const {setModal , visible} = this.props;
+
+    let classNames = 'char__modal';
+    if(visible) {
+      classNames += ' active';
+    }
+
+    const removeClasses = () => {
+      const modal = document.querySelector('.char__modal');
+      modal.classList.remove('active')
+      console.log(modal)
+    }
+    
+
 
     return (
-      <div className={visibility + ' char__modal'}>
-          <div className="char__modal_content"
-          >
+      <div className={`${classNames}`}
+      onClick={removeClasses}>
+          <div className="char__modal_content">
             <div className="char__modal_img">
                 <img src='#' alt="char" />
             </div>
