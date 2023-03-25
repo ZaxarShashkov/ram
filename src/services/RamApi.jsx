@@ -1,5 +1,6 @@
 class RamApi {
   _apiBase = "https://rickandmortyapi.com/api/character";
+  _basePage = 1;
 
   getResource = async (url) => {
     let res = await fetch(url);
@@ -11,8 +12,8 @@ class RamApi {
     return await res.json();
   };
 
-  getAllCharacters = async () => {
-    const res = await this.getResource(`${this._apiBase}?page=3`);
+  getAllCharacters = async (page = this._basePage) => {
+    const res = await this.getResource(`${this._apiBase}/?page=${page}`);
     return res.results.map(this._tansformCharacter);
   };
 

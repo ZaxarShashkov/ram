@@ -11,22 +11,37 @@ class CharList extends Component {
     charList: [],
     loading: true,
     error: false,
+    newItemLoading: false,
+    page: 1
   };
 
   ramApi = new RamApi();
 
   componentDidMount() {
-    this.ramApi
-      .getAllCharacters()
-      .then(this.onCharListLoaded)
-      .catch(this.onError);
+    this.onRequest();
   }
 
-  onCharListLoaded = (charList) => {
+  onRequest = (page) => {
+    this.onCharListLoading();
+    this.ramApi
+        .getAllCharacters(page)
+        .then(this.onCharListLoaded)
+        .catch(this.onError);
+  }
+
+  onCharListLoading = () => {
     this.setState({
-      charList,
-      loading: false,
-    });
+      newItemLoading: true
+    })
+  }
+
+  onCharListLoaded = (newCharList) => {
+    this.setState(({page , charList}) => ({
+        charList: [...charList, ...newCharList],
+        loading: false,
+        newItemLoading: false,
+        page: page + 1,
+    }));
   };
 
   onError = () => {
@@ -59,7 +74,7 @@ class CharList extends Component {
   }
 
   render() {
-    const { charList, loading, error } = this.state;
+    const { charList, loading, error, newItemLoading , page } = this.state;
     const items = this.renderItems(charList);
 
     const errorMessage = error ? <ErrorMessage /> : null;
@@ -71,7 +86,11 @@ class CharList extends Component {
         {errorMessage}
         {spinner}
         {content}
-        <button style={{ marginTop: "3em" }}>load more</button>
+        <button style={{ marginTop: "3em" }}
+                disabled={newItemLoading}
+                onClick={() => this.onRequest(page)}>
+                Next page
+        </button>
       </div>
     );
   }
