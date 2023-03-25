@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ErrorMessage from "../errorMessage/ErrorMessage";
+import PropTypes from 'prop-types';
 
 import "./charList.scss";
 import RamApi from "../../services/RamApi";
@@ -12,13 +13,16 @@ class CharList extends Component {
     loading: true,
     error: false,
     newItemLoading: false,
-    page: 1
+    page: 1,
   };
 
   ramApi = new RamApi();
 
   componentDidMount() {
-    this.onRequest();
+    this.ramApi
+        .getAllCharacters()
+        .then(this.onCharListLoaded)
+        .catch(this.onError);
   }
 
   onRequest = (page) => {
@@ -51,6 +55,20 @@ class CharList extends Component {
     });
   };
 
+  
+  onScrollList(event,page) {
+    const scrollBottom = event.target.scrollTop + 
+          event.target.offsetHeight === event.target.scrollHeight;
+      console.log('scrollBottom')
+      if (scrollBottom) {
+        console.log('request')
+        this.ramApi
+            .getAllCharacters(page)
+            .then(this.onCharListLoaded)
+            .catch(this.onError);
+      }
+    }
+    
 
 
   renderItems(arr) {
@@ -70,7 +88,11 @@ class CharList extends Component {
         </li>
       );
     });
-    return <ul className="char__grid">{items}</ul>;
+    return (
+        <ul className="char__grid">
+            {items}
+        </ul>
+    )
   }
 
   render() {
@@ -82,18 +104,25 @@ class CharList extends Component {
     const content = !(loading || error) ? items : null;
 
     return (
-      <div className="char__list">
+      <div className="char__list"
+           onScroll={(event, page) => this.onScrollList(event , page)}>
         {errorMessage}
         {spinner}
         {content}
         <button style={{ marginTop: "3em" }}
                 disabled={newItemLoading}
-                onClick={() => this.onRequest(page)}>
-                Next page
+                onClick={() => this.onRequest(page)}
+                >
+                Load More
         </button>
       </div>
     );
   }
+}
+
+
+CharList.propTypes = {
+  onCharSelected: PropTypes.func.isRequired
 }
 
 export default CharList;
