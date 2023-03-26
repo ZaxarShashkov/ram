@@ -54,22 +54,7 @@ class CharList extends Component {
       loading: false,
     });
   };
-
   
-  onScrollList(event,page) {
-    const scrollBottom = event.target.scrollTop + 
-          event.target.offsetHeight === event.target.scrollHeight;
-      console.log('scrollBottom')
-      if (scrollBottom) {
-        console.log('request')
-        this.ramApi
-            .getAllCharacters(page)
-            .then(this.onCharListLoaded)
-            .catch(this.onError);
-      }
-    }
-    
-
 
   renderItems(arr) {
     const items = arr.map((item) => {
@@ -103,9 +88,9 @@ class CharList extends Component {
     const spinner = loading ? <Spinner /> : null;
     const content = !(loading || error) ? items : null;
 
+
     return (
-      <div className="char__list"
-           onScroll={(event, page) => this.onScrollList(event , page)}>
+      <div className="char__list">
         {errorMessage}
         {spinner}
         {content}

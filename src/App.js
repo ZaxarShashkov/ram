@@ -9,8 +9,7 @@ class App extends Component {
 
   state = {
     selectedChar: null,
-    modal: false,
-  }
+    modal: false,  }
 
   onCharSelected = (id) => {
     this.setState({
