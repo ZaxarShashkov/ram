@@ -14,15 +14,26 @@ class CharList extends Component {
     error: false,
     newItemLoading: false,
     page: 1,
+    autoLoad: true
   };
 
   ramApi = new RamApi();
 
   scrollHandler = (e) => {
-    if(e.target.documentElement.scrollHeight - ( e.target.documentElement.scrollTop + window.innerHeight) < 100) {
-      console.log('scroll')
+    if(e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
       return this.onRequest(this.state.page);
     }  
+  }
+
+  onLoad = () => {
+    this.setState({
+      autoLoad: !this.state.autoLoad
+    })
+  }
+
+  removeScrollHandler = () => {
+    this.onLoad();
+    window.removeEventListener('scroll', this.scrollHandler);
   }
 
   componentDidMount() {
@@ -100,6 +111,9 @@ class CharList extends Component {
     const spinner = loading ? <Spinner /> : null;
     const content = !(loading || error) ? items : null;
 
+    if(this.state.autoLoad) {
+      window.addEventListener('scroll', this.scrollHandler);
+    }
 
     return (
       <div className="char__list">
@@ -112,6 +126,10 @@ class CharList extends Component {
                 >
                 Load More
         </button>
+        <button className="remove"
+        style={{ marginBottom : "20em" }}
+        onClick={() => this.removeScrollHandler()}
+                >remove</button>
       </div>
     );
   }
