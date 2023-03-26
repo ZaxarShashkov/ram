@@ -80,7 +80,7 @@ class CharList extends Component {
       charList: [...charList, ...newCharList],
       loading: false,
       newItemLoading: false,
-      page: page + 1,
+      page: page === 42 ? page : page + 1,
     }));
   };
 
