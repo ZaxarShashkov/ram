@@ -26,6 +26,23 @@
             border-radius: 16px;
             width: 600px;
             height: 300px; 
+            overflow: hidden;
+        }
+        &_desc {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            flex-wrap: wrap ;
+        }
+        &_title {
+            font-size: 1em;
+            color: #707d9d;
+        }
+        &_text {
+            font-size: 0.7em;
+        }
+        &_img {
+
         }
     }
 }
