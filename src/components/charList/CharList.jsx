@@ -25,7 +25,6 @@ class CharList extends Component {
   ramApi = new RamApi();
 
   onTop = () => {
-    console.log("totop");
     this.toTop.current.scrollIntoView();
   };
 
