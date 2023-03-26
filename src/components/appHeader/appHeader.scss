@@ -2,6 +2,7 @@
 
 .app {
     &__header {
+        padding: 0 1em 0 1em;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -18,6 +19,42 @@
         color: $second-color;
         span {
             color: $main-color;
+        }
+    }
+}
+
+@media screen and (max-width: 870px) {
+    .app {
+        &__title {
+            font-size: 2em;
+        }
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .app {
+        &__title {
+            font-size: 1.5em;
+        }
+    }
+}
+
+@media screen and (max-width: 530px) {
+.app {
+    &__title {
+        font-size: 1.5em;
+        text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 470px) {
+    .app{
+        &__logo {
+            display: none;
+        }
+        &__title {
+            padding-left: 1em;
         }
     }
 }

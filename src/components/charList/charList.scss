@@ -1,15 +1,23 @@
 @import '../../style/variables.scss';
 
+html {
+    scroll-behavior: smooth;
+}
+
 .char {
     &__list {
         color: $main-color;
         margin-top: 5em;
+        &_click {
+            margin-top: 3em;
+            display: flex;
+            justify-content: space-around;
+        }
     }
     &__grid {
         list-style: circle;
         display: grid;
         grid-template-columns: repeat(4, 230px);
-        // column-gap: 3.6em;
         justify-content: space-between;
         row-gap: 3em;
         list-style: none;
@@ -42,4 +50,43 @@
         text-align: center;
         margin-top: 9em;
     }
+}
+
+@media screen and (max-width: 970px) {
+    .char {
+        &__grid {
+            grid-template-columns: repeat(3, 230px);
+            justify-content: space-around;
+        }
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .char {
+        &__grid {
+            grid-template-columns: repeat(2, 230px);
+            justify-content: space-around;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .char {
+        &__grid {
+            grid-template-columns: 230px;
+            justify-content: center;
+        }
+    }
+}
+
+@media screen and (max-width: 405px) {
+    .char__list {    
+        &_click {
+            display: flex;
+            gap: 2em;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1em;
+        }   
+    }  
 }
