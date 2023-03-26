@@ -18,11 +18,23 @@ class CharList extends Component {
 
   ramApi = new RamApi();
 
+  scrollHandler = (e) => {
+    if(e.target.documentElement.scrollHeight - ( e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+      console.log('scroll')
+      return this.onRequest(this.state.page);
+    }  
+  }
+
   componentDidMount() {
+    window.addEventListener('scroll', this.scrollHandler)
     this.ramApi
         .getAllCharacters()
         .then(this.onCharListLoaded)
         .catch(this.onError);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.scrollHandler)
   }
 
   onRequest = (page) => {
