@@ -32,7 +32,7 @@ class CharList extends Component {
     if (
       e.target.documentElement.scrollHeight -
         (e.target.documentElement.scrollTop + window.innerHeight) <
-      20
+      5
     ) {
       return this.onRequest(this.state.page);
     }
