@@ -1,42 +1,34 @@
-import { Component } from "react";
+import { useState } from "react";
 import AppHeader from "./components/appHeader/AppHeader";
 import CharList from "./components/charList/CharList";
 import CharModal from "./components/charModal/CharModal";
 
 import "./style/style.scss";
 
-class App extends Component {
+const App = () => {
+  const [selectedChar, setSelectedChar] = useState(null);
+  const [modal, setOnModal] = useState(false);
 
-  state = {
-    selectedChar: null,
-    modal: false,  }
+  const onCharSelected = (id) => {
+    setSelectedChar(id);
+  };
 
-  onCharSelected = (id) => {
-    this.setState({
-      selectedChar: id,
-    })
-  }
+  const setModal = () => {
+    setOnModal(modal => !modal);
+  };
 
-  setModal = (modal) => {
-    this.setState({
-      modal: !modal,
-    })
-  }
-
-  render() {
-
-    const {selectedChar, modal} = this.state;
-    
-    return (
-      <div className="App">
-        <CharModal charId={selectedChar} visible={modal} />
-        <AppHeader />
-        <main className="main">
-          <CharList onCharSelected={this.onCharSelected} setModal={this.setModal} visible={modal}/>
-        </main>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <CharModal charId={selectedChar} visible={modal} />
+      <AppHeader />
+      <main className="main">
+        <CharList
+          onCharSelected={onCharSelected}
+          setModal={setModal}
+        />
+      </main>
+    </div>
+  );
+};
 
 export default App;

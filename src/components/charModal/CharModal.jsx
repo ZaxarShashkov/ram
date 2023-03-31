@@ -1,90 +1,71 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import "./charModal.scss";
 import RamApi from "../../services/RamApi";
 
-class CharModal extends Component {
-  state = {
-    char: null,
-    loading: false,
-    error: false,
-  };
+const CharModal = (props) => {
 
-  ramApi = new RamApi();
+  const [char, setChar] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  componentDidMount() {
-    this.updateChar();
-  }
+  const ramApi = new RamApi();
 
-  componentDidUpdate(prevProps) {
-    if (this.props.charId !== prevProps.charId) {
-      this.updateChar();
-    }
-  }
+  useEffect(() => {
+    updateChar();
+  }, [props.charId]);
 
-  updateChar = () => {
-    const { charId } = this.props;
+  const updateChar = () => {
+    const { charId } = props;
     if (!charId) {
       return;
     }
 
-    this.onCharLoading();
+    onCharLoading();
 
-    this.ramApi
-      .getCharacter(charId)
-      .then(this.onCharListLoaded)
-      .catch(this.onError);
+    ramApi.getCharacter(charId).then(onCharListLoaded).catch(onError);
   };
 
-  onCharLoading = () => {
-    this.setState({
-      loading: true,
-    });
+  const onCharLoading = () => {
+    setLoading(true);
   };
 
-  onCharListLoaded = (char) => {
-    this.setState({
-      char,
-      loading: false,
-    });
+  const onCharListLoaded = (char) => {
+    setChar(char);
+    setLoading(false);
   };
 
-  onError = () => {
-    this.setState({
-      error: true,
-      loading: false,
-    });
+  const onError = () => {
+    setError(true);
+    setLoading(false);
   };
 
-  render() {
-    const { visible } = this.props;
-    const { char, loading, error } = this.state;
+  const { visible } = props;
 
-    let classNames = "char__modal";
-    if (visible) {
-      classNames += " active";
-    }
-
-    const removeClasses = () => {
-      const modal = document.querySelector(".char__modal");
-      modal.classList.remove("active");
-    };
-
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || error || !char) ? <View char={char} /> : null;
-
-    return (
-      <div className={`${classNames}`} onClick={removeClasses}>
-        {errorMessage}
-        {spinner}
-        {content}
-      </div>
-    );
+  let classNames = "char__modal";
+  if (visible) {
+    classNames += " active";
   }
-}
+
+  const removeClasses = () => {
+    const modal = document.querySelector(".char__modal");
+    modal.classList.remove("active");
+  };
+
+  const errorMessage = error ? <ErrorMessage /> : null;
+  const spinner = loading ? <Spinner /> : null;
+  const content = !(loading || error || !char) ? <View char={char} /> : null;
+
+  return (
+    <div className={`${classNames}`} onClick={removeClasses}>
+      {errorMessage}
+      {spinner}
+      {content}
+    </div>
+  );
+};
 
 const View = ({ char }) => {
   const { name, status, origin, image, species, location, gender } = char;
