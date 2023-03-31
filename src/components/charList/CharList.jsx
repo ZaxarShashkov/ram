@@ -97,12 +97,14 @@ class CharList extends Component {
         <li
           className="char__item"
           key={item.id}
-          onClick={() => this.props.onCharSelected(item.id)}
+          onClick={() => {
+          this.props.onCharSelected(item.id)
+          this.props.setModal(this.props.visible)
+          }}
+          visible={this.props.visible}
         >
           <div
             className="char__block"
-            onClick={() => this.props.setModal(this.props.visible)}
-            visible={this.props.visible}
           >
             <img src={item.image} alt="char" className="char__img" />
           </div>
